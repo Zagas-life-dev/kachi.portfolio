@@ -579,8 +579,8 @@
 
         // Scroll reveal animations
         const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
+            threshold: 0.05,
+            rootMargin: '0px 0px -40px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -592,20 +592,28 @@
         }, observerOptions);
 
         // Observe all elements with animation classes
-        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in').forEach(el => {
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in, .fly-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Hero fly-in sequence
+        const heroSequence = document.querySelectorAll('.hero-content > *, .hero-image .image-frame, .hero-stats .stat');
+        heroSequence.forEach((el, index) => {
+            el.classList.add('fly-in');
+            el.style.transitionDelay = `${index * 0.06}s`;
             observer.observe(el);
         });
 
         // Add animation classes to elements
         document.querySelectorAll('.skill-card, .project-card, .contact-item, .digital-item, .highlight-item, .education-item').forEach((el, index) => {
             el.classList.add('fade-in');
-            el.style.transitionDelay = `${index * 0.1}s`;
+            el.style.transitionDelay = `${index * 0.05}s`;
             observer.observe(el);
         });
 
         // Animate section headers
         document.querySelectorAll('.section-header').forEach((el, index) => {
-            el.style.transitionDelay = `${index * 0.2}s`;
+            el.style.transitionDelay = `${index * 0.08}s`;
             observer.observe(el);
         });
 
